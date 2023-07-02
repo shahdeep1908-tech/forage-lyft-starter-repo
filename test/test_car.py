@@ -8,6 +8,9 @@ from engine.sternman_engine import SternmanEngine
 from battery.spindler_battery import SpindlerBattery
 from battery.nubbin_battery import NubbinBattery
 
+from tire.carrigan_tire import CarriganTire
+from tire.octoprime_tire import OctoprimeTire
+
 
 class TestCalliope(unittest.TestCase):
     def test_battery_should_be_serviced(self):
@@ -36,6 +39,18 @@ class TestCalliope(unittest.TestCase):
         last_service_mileage = 0
 
         car = CapuletEngine(last_service_mileage, current_mileage)
+        self.assertFalse(car.needs_service())
+
+    def test_tire_should_be_serviced(self):
+        tire_wear_sensors = [0.4, 0.3, 0.1, 0.2]
+
+        car = CarriganTire(tire_wear_sensors)
+        self.assertTrue(car.needs_service())
+
+    def test_tire_should_not_be_serviced(self):
+        tire_wear_sensors = [0.1, 0.2, 0.2, 0.2]
+
+        car = CarriganTire(tire_wear_sensors)
         self.assertFalse(car.needs_service())
 
 
@@ -68,6 +83,18 @@ class TestGlissade(unittest.TestCase):
         car = WilloughbyEngine(last_service_mileage, current_mileage)
         self.assertFalse(car.needs_service())
 
+    def test_tire_should_be_serviced(self):
+        tire_wear_sensors = [0.8, 1, 1, 0.8]
+
+        car = OctoprimeTire(tire_wear_sensors)
+        self.assertTrue(car.needs_service())
+
+    def test_tire_should_not_be_serviced(self):
+        tire_wear_sensors = [0.1, 0.2, 0.2, 0.2]
+
+        car = OctoprimeTire(tire_wear_sensors)
+        self.assertFalse(car.needs_service())
+
 
 class TestPalindrome(unittest.TestCase):
     def test_battery_should_be_serviced(self):
@@ -93,6 +120,18 @@ class TestPalindrome(unittest.TestCase):
         warning_light_on = False
 
         car = SternmanEngine(warning_light_on)
+        self.assertFalse(car.needs_service())
+
+    def test_tire_should_be_serviced(self):
+        tire_wear_sensors = [0.1, 0.2, 0.3, 1]
+
+        car = CarriganTire(tire_wear_sensors)
+        self.assertTrue(car.needs_service())
+
+    def test_tire_should_not_be_serviced(self):
+        tire_wear_sensors = [0.1, 0.2, 0.2, 0.2]
+
+        car = CarriganTire(tire_wear_sensors)
         self.assertFalse(car.needs_service())
 
 
@@ -125,8 +164,19 @@ class TestRorschach(unittest.TestCase):
         car = WilloughbyEngine(last_service_mileage, current_mileage)
         self.assertFalse(car.needs_service())
 
+    def test_tire_should_be_serviced(self):
+        tire_wear_sensors = [0.8, 0.8, 0.8, 0.8]
 
-#
+        car = OctoprimeTire(tire_wear_sensors)
+        self.assertTrue(car.needs_service())
+
+    def test_tire_should_not_be_serviced(self):
+        tire_wear_sensors = [0.1, 0.1, 0.6, 0.2]
+
+        car = OctoprimeTire(tire_wear_sensors)
+        self.assertFalse(car.needs_service())
+
+
 class TestThovex(unittest.TestCase):
     def test_battery_should_be_serviced(self):
         today = datetime.now().date()
@@ -154,6 +204,18 @@ class TestThovex(unittest.TestCase):
         last_service_mileage = 0
 
         car = CapuletEngine(last_service_mileage, current_mileage)
+        self.assertFalse(car.needs_service())
+
+    def test_tire_should_be_serviced(self):
+        tire_wear_sensors = [0.1, 0.2, 0.3, 1]
+
+        car = CarriganTire(tire_wear_sensors)
+        self.assertTrue(car.needs_service())
+
+    def test_tire_should_not_be_serviced(self):
+        tire_wear_sensors = [0.1, 0.2, 0.2, 0.2]
+
+        car = CarriganTire(tire_wear_sensors)
         self.assertFalse(car.needs_service())
 
 
